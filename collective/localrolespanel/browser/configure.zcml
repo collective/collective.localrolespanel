@@ -7,4 +7,18 @@
 
   <!-- -*- extra stuff goes here -*- -->
 
+  <!-- Localroles Controlpanel Form -->
+  <browser:page
+      name="localroles-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".localroles_controlpanel.LocalRolesControlPanel"
+      permission="cmf.ManagePortal"
+      />
+
+  <!-- Icon for localroles-controlpanel -->
+  <browser:resource 
+      name="page_excel.png"
+      image="page_excel.png"
+    />
+
 </configure>

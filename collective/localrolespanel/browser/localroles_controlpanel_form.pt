@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/prefs_main_template/macros/master"
+      i18n:domain="pas.plugins.fixed">
+<head>
+    <metal:javascript fill-slot="javascript_head_slot">
+    </metal:javascript>
+
+    <metal:css fill-slot="style_slot">
+    </metal:css>
+
+    <!-- disable the portlet columns -->
+    <metal:block fill-slot="top_slot"
+           tal:define="dummy python:request.set('disable_border',1);
+                       disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                       disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+</head>
+<body>
+  <div metal:fill-slot="prefs_configlet_main">
+    <div id="content">
+      <a href=""
+         class="link-parent"
+         tal:attributes="href string:$portal_url/plone_control_panel"
+         i18n:translate="label_up_to_plone_setup">
+          Up to Site Setup
+      </a>
+      <div metal:use-macro="context/base-pageform.html/form" />
+    </div>
+  </div>
+</body>
+</html>
+
+<!-- vim: set ft=html ts=2 sw=2 expandtab : -->
+
