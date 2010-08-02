@@ -16,7 +16,7 @@ verbose error notifications for each unsuccessful line.
 the number of lines of your csv and may take up to 
 several minutes.
 
-Example csv:
+Example csv::
 
         /plone/front-page,Reviewers,Editor
         /plone/front-page,usera,Contributor
