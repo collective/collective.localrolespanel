@@ -19,7 +19,6 @@ long_description = (
     + '\n' +
     read('docs', 'HISTORY.txt')
     + '\n' +
-    + '\n' +
     'Contributors\n'
     '************\n'
     + '\n' +
