@@ -23,4 +23,7 @@
   
   <!-- -*- extra stuff goes here -*- -->
 
+  <!-- API for std local roles -->
+  <utility factory=".stdlocalroles.StdLocalRoles" />
+
 </configure>
