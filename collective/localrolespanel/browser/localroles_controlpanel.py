@@ -65,9 +65,9 @@ class LocalRolesControlPanel(PageForm):
     label = _(u'heading_local_roles_settings',
               default=u'Local Roles Settings')
     description = _(u'help_local_roles_settings',
-            default=u"""<p>Set or Remove local roles for companies using csv. 
+            default=u"""<p>Set or Remove local roles for objects using csv. 
                         The format of the csv file should be:</p>
-                        <pre>companyid,user-/group-id,role</pre>
+                        <pre>path,user-/group-id,role</pre>
                         <p>The data gets processed line by line. At the end, 
                         you'll get a notification on the number of successfully processed lines 
                         as well as verbose error notifications for each unsuccessful
@@ -75,10 +75,10 @@ class LocalRolesControlPanel(PageForm):
                         and may take up to several minutes.</p>
                         <p>Example csv:</p>
                         <pre>
-                        0000012,roche,Reader
-                        0003458,smolter,Contributor
-                        0003400,sanofi,Reviewer
-                        0003458,202pharma,Editor
+                        /plone/front-page,Reviewers,Editor
+                        /plone/front-page,usera,Contributor
+                        /plone/news,userb,Reviewer
+                        /plone/news,userb,Editor
                         </pre>
                      """)
     template = ViewPageTemplateFile('localroles_controlpanel_form.pt')
@@ -113,29 +113,25 @@ class LocalRolesControlPanel(PageForm):
 
         csv_file = StringIO(data["csv_file"])
         reader = csv.reader(csv_file, delimiter=DELIMITER)
-        pc = getToolByName(self.context, "portal_catalog")
 
         for num, row in enumerate(reader):
             if len(row) != 3:
                 errors.append("Line %(num)s, %(row)s, Invalid line" % locals())
                 continue
 
-            brains = pc(dict(company_id=row[0]))
-
-            if len(brains) == 0:
-                errors.append("Line %(num)s, %(row)s, Company not found" % locals())
+            try:
+                content_item = self.context.unrestrictedTraverse(row[0])
+            except KeyError, e:
+                errors.append("Line %(num)s, %(row)s, Object not found" % locals())
                 continue
-            elif len(brains) > 1:
-                errors.append("Line %(num)s, %(row)s, Too many Companies found" % locals())
-                continue
-            else:
-                try:
-                    self.utility.addRole(brains[0].getObject(), row[1], row[2])
-                    success += 1
-                except StdLocalRolesError, e:
-                    errors.append("Line %(num)s, %(row)s, %(e)s" % locals())
 
-        msg = "Successfully set Roles for %s Companies" % str(success)
+            try:
+                self.utility.addRole(content_item, row[1], row[2])
+                success += 1
+            except StdLocalRolesError, e:
+                errors.append("Line %(num)s, %(row)s, %(e)s" % locals())
+
+        msg = "Successfully set Roles for %s Lines" % str(success)
         if errors:
             self._add_status_message(msg)
 
@@ -157,29 +153,26 @@ class LocalRolesControlPanel(PageForm):
 
         csv_file = StringIO(data["csv_file"])
         reader = csv.reader(csv_file, delimiter=DELIMITER)
-        pc = getToolByName(self.context, "portal_catalog")
 
         for num, row in enumerate(reader):
             if len(row) != 3:
                 errors.append("Line %(num)s, %(row)s, Invalid line" % locals())
                 continue
 
-            brains = pc(dict(company_id=row[0]))
-
-            if len(brains) == 0:
-                errors.append("Line %(num)s, %(row)s, Company not found" % locals())
+            try:
+                content_item = self.context.unrestrictedTraverse(row[0])
+            except KeyError, e:
+                errors.append("Line %(num)s, %(row)s, Object not found" % locals())
                 continue
-            elif len(brains) > 1:
-                errors.append("Line %(num)s, %(row)s, Too many Companies found" % locals())
-                continue
-            else:
-                try:
-                    self.utility.removeRole(brains[0].getObject(), row[1], row[2])
-                    success += 1
-                except StdLocalRolesError, e:
-                    errors.append("%(num)s, %(row)s, %(e)s" % locals())
 
-        msg = "Successfully removed Roles for %s Companies" % str(success)
+            try:
+                self.utility.removeRole(content_item, row[1], row[2])
+                success += 1
+            except StdLocalRolesError, e:
+                errors.append("Line %(num)s, %(row)s, %(e)s" % locals())
+
+        msg = "Successfully removed Roles for %s Lines" % str(success)
+
         if errors:
             self._add_status_message(msg)
             for e in errors:
