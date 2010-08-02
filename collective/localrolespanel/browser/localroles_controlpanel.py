@@ -38,10 +38,10 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.CMFCore.utils import getToolByName
 
-from pas.plugins.fixed.interfaces import IStdLocalRoles
-from pas.plugins.fixed.interfaces import StdLocalRolesError
+from collective.localrolespanel.interfaces import IStdLocalRoles
+from collective.localrolespanel.interfaces import StdLocalRolesError
 
-from pas.plugins.fixed import fixedMessageFactory as _
+from collective.localrolespanel import fixedMessageFactory as _
 
 DELIMITER = ","
 logger = logging.getLogger("localroles_controlpanel")

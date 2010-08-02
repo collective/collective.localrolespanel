@@ -3,7 +3,7 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/prefs_main_template/macros/master"
-      i18n:domain="pas.plugins.fixed">
+      i18n:domain="collective.localrolespanel">
 <head>
     <metal:javascript fill-slot="javascript_head_slot">
     </metal:javascript>
