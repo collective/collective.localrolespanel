@@ -62,25 +62,6 @@ class LocalRolesControlPanel(PageForm):
     """ Local roles control panel for bulk settings
     """
 
-    label = _(u'heading_local_roles_settings',
-              default=u'Local Roles Settings')
-    description = _(u'help_local_roles_settings',
-            default=u"""<p>Set or Remove local roles for objects using csv. 
-                        The format of the csv file should be:</p>
-                        <pre>path,user-/group-id,role</pre>
-                        <p>The data gets processed line by line. At the end, 
-                        you'll get a notification on the number of successfully processed lines 
-                        as well as verbose error notifications for each unsuccessful
-                        line. Be patient! The duration of the process depends on the number of lines of your csv 
-                        and may take up to several minutes.</p>
-                        <p>Example csv:</p>
-                        <pre>
-                        /plone/front-page,Reviewers,Editor
-                        /plone/front-page,usera,Contributor
-                        /plone/news,userb,Reviewer
-                        /plone/news,userb,Editor
-                        </pre>
-                     """)
     template = ViewPageTemplateFile('localroles_controlpanel_form.pt')
 
     def __init__(self, context, request):
@@ -103,10 +84,10 @@ class LocalRolesControlPanel(PageForm):
         return formlib.Fields(ILocalRoleSettings)
 
 
-    @formlib.action(_(u'label_set_roles', default=u'Set Roles'),
-                 validator='validate_csv', name=u'Set Roles')
-    def action_set_roles(self, action, data):
-        """ handle set roles
+    @formlib.action(_(u'label_add_roles', default=u'Add Roles'),
+                 validator='validate_csv', name=u'Add Roles')
+    def action_add_roles(self, action, data):
+        """ handle add roles
         """
         errors = []
         success = 0
@@ -131,7 +112,7 @@ class LocalRolesControlPanel(PageForm):
             except StdLocalRolesError, e:
                 errors.append("Line %(num)s, %(row)s, %(e)s" % locals())
 
-        msg = "Successfully set Roles for %s Lines" % str(success)
+        msg = "Successfully added Roles for %s Lines" % str(success)
         if errors:
             self._add_status_message(msg)
 
@@ -143,10 +124,10 @@ class LocalRolesControlPanel(PageForm):
         self._redirect_back_to(url="/@@localroles-controlpanel")
 
 
-    @formlib.action(_(u'label_delete_roles', default=u'Delete Roles'),
-                 validator='validate_csv', name=u'Delete Roles')
-    def action_delete_roles(self, action, data):
-        """ handle delete roles
+    @formlib.action(_(u'label_remove_roles', default=u'Remove Roles'),
+                 validator='validate_csv', name=u'Remove Roles')
+    def action_remove_roles(self, action, data):
+        """ handle remove roles
         """
         errors = []
         success = 0

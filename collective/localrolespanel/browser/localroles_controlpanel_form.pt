@@ -26,6 +26,26 @@
          i18n:translate="label_up_to_plone_setup">
           Up to Site Setup
       </a>
+      <h1 i18n:translate="heading_local_roles_panel" id="localrolescontrolpanelheading" class="documentFirstHeading">
+        Local Roles Settings
+      </h1>
+      <div i18n:translate="help_local_roles_panel" id="localrolescontrolpanelhelp" class="documentDescription">
+        <p>Add or Remove local roles for objects using csv. 
+        The format of the csv file should be:</p>
+        <pre>path,user-/group-id,role</pre>
+        <p>The data gets processed line by line. At the end, 
+        you'll get a notification on the number of successfully processed lines 
+        as well as verbose error notifications for each unsuccessful
+        line. Be patient! The duration of the process depends on the number of lines of your csv 
+        and may take up to several minutes.</p>
+        <p>Example csv:</p>
+        <pre>
+        /plone/front-page,Reviewers,Editor
+        /plone/front-page,usera,Contributor
+        /plone/news,userb,Reviewer
+        /plone/news,userb,Editor
+        </pre>
+      </div>
       <div metal:use-macro="context/base-pageform.html/form" />
     </div>
   </div>
