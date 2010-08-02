@@ -1,2 +1,3 @@
-recursive-include collective *
+global-include .py .js .pt .txt .zcml .dtml .css .metadata .xml .props .kss .jpg .cpy .vpy .cpt .pot .po .ico .png .gif
+recursive-include docs *
 global-exclude *pyc
