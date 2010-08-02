@@ -19,10 +19,6 @@ long_description = (
     + '\n' +
     read('docs', 'HISTORY.txt')
     + '\n' +
-    'Detailed Documentation\n'
-    '**********************\n'
-    + '\n' +
-    read('collective', 'localrolespanel', 'README.txt')
     + '\n' +
     'Contributors\n'
     '************\n'
