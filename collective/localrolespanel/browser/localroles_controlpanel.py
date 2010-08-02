@@ -41,7 +41,7 @@ from Products.CMFCore.utils import getToolByName
 from collective.localrolespanel.interfaces import IStdLocalRoles
 from collective.localrolespanel.interfaces import StdLocalRolesError
 
-from collective.localrolespanel import fixedMessageFactory as _
+from collective.localrolespanel import localrolespanelMessageFactory as _
 
 DELIMITER = ","
 logger = logging.getLogger("localroles_controlpanel")
