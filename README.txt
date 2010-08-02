@@ -1,5 +1,6 @@
 /@@localroles-controlpanel
 **************************
+Tested with plone4
 
 Add or Remove local roles for objects using csv. 
 The format of the csv file should be::
