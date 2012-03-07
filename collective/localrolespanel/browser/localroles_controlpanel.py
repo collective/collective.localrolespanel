@@ -32,7 +32,7 @@ from zope.formlib import form as formlib
 
 from plone.protect import CheckAuthenticator
 from plone.app.form.validators import null_validator
-from Products.Five.formlib.formbase import PageForm
+from five.formlib.formbase import PageForm
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from Products.statusmessages.interfaces import IStatusMessage
