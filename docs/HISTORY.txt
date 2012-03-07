@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2 (????-??-??)
+0.2 (2012-03-07)
 ----------------
 
 - made compatible with Plone 4.1.x
