@@ -18,7 +18,7 @@ several minutes.
 
 Example csv::
 
-        /plone/front-page,Reviewers,Editor
-        /plone/front-page,usera,Contributor
-        /plone/news,userb,Reviewer
-        /plone/news,userb,Editor
+        /Plone/front-page,Reviewers,Editor
+        /Plone/front-page,usera,Contributor
+        /Plone/news,userb,Reviewer
+        /Plone/news,userb,Editor
